@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :bookmarks
   resources :users
 
-  root '/'
+  root :to => "home#index"
+
 
   mount Landable::Engine => '/' # move this to the end of your routes block
 end
