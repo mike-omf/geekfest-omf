@@ -1,0 +1,76 @@
+Landable::Traffic::UserAgent Load (1.47) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:91:in `for'*/ SELECT  "landable_traffic"."user_agents".* FROM "landable_traffic"."user_agents" WHERE "landable_traffic"."user_agents"."user_agent" = $1 ORDER BY "landable_traffic"."user_agents"."user_agent_id" ASC LIMIT $2
+ (0.22) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:91:in `for'*/ BEGIN
+
+Landable::Traffic::UserAgent Create (1.45) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:91:in `for'*/ INSERT INTO "landable_traffic"."user_agents" ("user_agent", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "user_agent_id"
+ (0.92) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:91:in `for'*/ COMMIT
+ (0.31) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:157:in `cookie'*/ BEGIN
+
+Landable::Traffic::Cookie Create (0.65) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:157:in `cookie'*/ INSERT INTO "landable_traffic"."cookies" ("cookie_id", "created_at") VALUES ($1, $2) RETURNING "cookie_id"
+ (5.92) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:157:in `cookie'*/ COMMIT
+
+Landable::Traffic::UserAgent Load (0.55) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:193:in `user_agent'*/ SELECT  "landable_traffic"."user_agents".* FROM "landable_traffic"."user_agents" WHERE "landable_traffic"."user_agents"."user_agent" = $1 ORDER BY "landable_traffic"."user_agents"."user_agent_id" ASC LIMIT $2
+
+Landable::Traffic::Attribution Load (2.25) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/app/models/landable/traffic/attribution.rb:32:in `lookup'*/ SELECT  "landable_traffic"."attributions".* FROM "landable_traffic"."attributions" WHERE "landable_traffic"."attributions"."ad_type_id" IS NULL AND "landable_traffic"."attributions"."ad_group_id" IS NULL AND "landable_traffic"."attributions"."bid_match_type_id" IS NULL AND "landable_traffic"."attributions"."campaign_id" IS NULL AND "landable_traffic"."attributions"."content_id" IS NULL AND "landable_traffic"."attributions"."creative_id" IS NULL AND "landable_traffic"."attributions"."device_type_id" IS NULL AND "landable_traffic"."attributions"."keyword_id" IS NULL AND "landable_traffic"."attributions"."match_type_id" IS NULL AND "landable_traffic"."attributions"."medium_id" IS NULL AND "landable_traffic"."attributions"."network_id" IS NULL AND "landable_traffic"."attributions"."placement_id" IS NULL AND "landable_traffic"."attributions"."position_id" IS NULL AND "landable_traffic"."attributions"."search_term_id" IS NULL AND "landable_traffic"."attributions"."source_id" IS NULL AND "landable_traffic"."attributions"."target_id" IS NULL AND "landable_traffic"."attributions"."trkcd_id" IS NULL AND "landable_traffic"."attributions"."cscald_id" IS NULL AND "landable_traffic"."attributions"."extension_id" IS NULL AND "landable_traffic"."attributions"."device_model_id" IS NULL AND "landable_traffic"."attributions"."secured_flag_id" IS NULL ORDER BY "landable_traffic"."attributions"."attribution_id" ASC LIMIT $1
+ (0.15) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/app/models/landable/traffic/attribution.rb:32:in `lookup'*/ BEGIN
+
+Landable::Traffic::Attribution Create (1.66) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/app/models/landable/traffic/attribution.rb:32:in `lookup'*/ INSERT INTO "landable_traffic"."attributions" DEFAULT VALUES RETURNING "attribution_id"
+ (3.62) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/app/models/landable/traffic/attribution.rb:32:in `lookup'*/ COMMIT
+
+Landable::Traffic::IpAddress Load (0.78) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:214:in `ip_address'*/ SELECT  "landable_traffic"."ip_addresses".* FROM "landable_traffic"."ip_addresses" WHERE "landable_traffic"."ip_addresses"."ip_address" = $1 ORDER BY "landable_traffic"."ip_addresses"."ip_address_id" ASC LIMIT $2
+ (0.11) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:214:in `ip_address'*/ BEGIN
+
+Landable::Traffic::IpAddress Create (0.85) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:214:in `ip_address'*/ INSERT INTO "landable_traffic"."ip_addresses" ("ip_address", "created_at") VALUES ($1, $2) RETURNING "ip_address_id"
+ (0.85) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:214:in `ip_address'*/ COMMIT
+
+Landable::Traffic::Visitor Load (0.56) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:360:in `visitor'*/ SELECT  "landable_traffic"."visitors".* FROM "landable_traffic"."visitors" WHERE "landable_traffic"."visitors"."ip_address_id" = $1 AND "landable_traffic"."visitors"."user_agent_id" = $2 ORDER BY "landable_traffic"."visitors"."visitor_id" ASC LIMIT $3
+ (0.14) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:360:in `visitor'*/ BEGIN
+
+Landable::Traffic::Visitor Create (0.93) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:360:in `visitor'*/ INSERT INTO "landable_traffic"."visitors" ("ip_address_id", "user_agent_id", "created_at") VALUES ($1, $2, $3) RETURNING "visitor_id"
+ (0.26) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:360:in `visitor'*/ COMMIT
+
+Landable::Traffic::NewVisitReason Load (0.42) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:287:in `new_visit_reason'*/ SELECT  "landable_traffic"."new_visit_reasons".* FROM "landable_traffic"."new_visit_reasons" WHERE "landable_traffic"."new_visit_reasons"."new_visit_reason" = $1 ORDER BY "landable_traffic"."new_visit_reasons"."new_visit_reason_id" ASC LIMIT $2
+ (0.09) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:287:in `new_visit_reason'*/ BEGIN
+
+Landable::Traffic::NewVisitReason Create (0.71) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:287:in `new_visit_reason'*/ INSERT INTO "landable_traffic"."new_visit_reasons" ("new_visit_reason") VALUES ($1) RETURNING "new_visit_reason_id"
+ (0.29) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:287:in `new_visit_reason'*/ COMMIT
+ (0.17) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:260:in `create_visit'*/ BEGIN
+
+Landable::Traffic::Visit Create (1.68) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:260:in `create_visit'*/ INSERT INTO "landable_traffic"."visits" ("cookie_id", "visitor_id", "attribution_id", "do_not_track", "new_visit_reason_id") VALUES ($1, $2, $3, $4, $5) RETURNING "visit_id"
+ (0.36) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:260:in `create_visit'*/ COMMIT
+ (0.15) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:262:in `create_visit'*/ BEGIN
+
+Landable::Traffic::VisitIpAddress Create (1.49) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:262:in `create_visit'*/ INSERT INTO "landable_traffic"."visit_ip_addresses" ("visit_id", "ip_address_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "visit_ip_address_id"
+ (0.35) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/tracker.rb:262:in `create_visit'*/ COMMIT
+
+Landable::Traffic::HTTPMethod Load (0.54) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:28:in `block in record_page_view'*/ SELECT  "landable_traffic"."http_methods".* FROM "landable_traffic"."http_methods" WHERE "landable_traffic"."http_methods"."http_method" = $1 ORDER BY "landable_traffic"."http_methods"."http_method_id" ASC LIMIT $2
+ (0.17) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:28:in `block in record_page_view'*/ BEGIN
+
+Landable::Traffic::HTTPMethod Create (0.78) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:28:in `block in record_page_view'*/ INSERT INTO "landable_traffic"."http_methods" ("http_method") VALUES ($1) RETURNING "http_method_id"
+ (0.27) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:28:in `block in record_page_view'*/ COMMIT
+
+Landable::Traffic::MimeType Load (0.6) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:29:in `block in record_page_view'*/ SELECT  "landable_traffic"."mime_types".* FROM "landable_traffic"."mime_types" WHERE "landable_traffic"."mime_types"."mime_type" = $1 ORDER BY "landable_traffic"."mime_types"."mime_type_id" ASC LIMIT $2
+ (0.15) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:29:in `block in record_page_view'*/ BEGIN
+
+Landable::Traffic::MimeType Create (0.67) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:29:in `block in record_page_view'*/ INSERT INTO "landable_traffic"."mime_types" ("mime_type") VALUES ($1) RETURNING "mime_type_id"
+ (0.27) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:29:in `block in record_page_view'*/ COMMIT
+
+Landable::Traffic::Path Load (0.68) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:30:in `block in record_page_view'*/ SELECT  "landable_traffic"."paths".* FROM "landable_traffic"."paths" WHERE "landable_traffic"."paths"."path" = $1 ORDER BY "landable_traffic"."paths"."path_id" ASC LIMIT $2
+ (0.19) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:30:in `block in record_page_view'*/ BEGIN
+
+Landable::Traffic::Path Create (0.56) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:30:in `block in record_page_view'*/ INSERT INTO "landable_traffic"."paths" ("path", "created_at") VALUES ($1, $2) RETURNING "path_id"
+ (0.28) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:30:in `block in record_page_view'*/ COMMIT
+
+Landable::Traffic::QueryString Load (0.49) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:31:in `block in record_page_view'*/ SELECT  "landable_traffic"."query_strings".* FROM "landable_traffic"."query_strings" WHERE "landable_traffic"."query_strings"."query_string" = $1 ORDER BY "landable_traffic"."query_strings"."query_string_id" ASC LIMIT $2
+ (0.09) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:31:in `block in record_page_view'*/ BEGIN
+
+Landable::Traffic::QueryString Create (0.89) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:31:in `block in record_page_view'*/ INSERT INTO "landable_traffic"."query_strings" ("query_string", "created_at") VALUES ($1, $2) RETURNING "query_string_id"
+ (0.36) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:31:in `block in record_page_view'*/ COMMIT
+ (0.1) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:27:in `record_page_view'*/ BEGIN
+
+Landable::Traffic::Path Load (0.21) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/app/models/landable/traffic/page_view.rb:18:in `set_page_revision'*/ SELECT  "landable_traffic"."paths".* FROM "landable_traffic"."paths" WHERE "landable_traffic"."paths"."path_id" = $1 ORDER BY "landable_traffic"."paths"."path_id" ASC LIMIT $2
+
+Landable::Page Load (0.78) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/app/models/landable/traffic/page_view.rb:18:in `set_page_revision'*/ SELECT  "landable"."pages"."published_revision_id" FROM "landable"."pages" WHERE "landable"."pages"."path" = $1 ORDER BY "landable"."pages"."page_id" ASC LIMIT $2
+
+Landable::Traffic::PageView Create (2.39) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:27:in `record_page_view'*/ INSERT INTO "landable_traffic"."page_views" ("visit_id", "path_id", "query_string_id", "mime_type_id", "http_method_id", "request_id", "click_id", "http_status", "created_at", "response_time", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "page_view_id"
+ (0.39) /*application:BlandAle,line:/Users/mike.hall/projects/springleaf/landable/lib/landable/traffic/user_tracker.rb:27:in `record_page_view'*/ COMMIT
+
